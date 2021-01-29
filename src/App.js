@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Calculator from "./components/Calculator";
 import Clock from "./components/Clock";
 import LoginControl from "./components/LoginControl";
 import NameForm from "./components/NameForm";
@@ -13,11 +14,18 @@ function App() {
   return (
     <>
       <Clock />
+      <hr />
       <Toggle />
+      <hr />
       <LoginControl />
+      <hr />
       <NumberList numbers={numbers} />
+      <hr />
       <NameForm />
+      <hr />
       <Reservation />
+      <hr />
+      <Calculator />
     </>
   );
 }
