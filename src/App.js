@@ -6,6 +6,7 @@ import LoginControl from "./components/LoginControl";
 import NameForm from "./components/NameForm";
 import NumberList from "./components/NumberList";
 import Reservation from "./components/Reservation";
+import ShoppingList from "./components/ShoppingListStudy/ShoppingList";
 import Toggle from "./components/Toggle";
 
 const numbers = [1, 2, 3, 4, 5];
@@ -26,6 +27,8 @@ function App() {
       <Reservation />
       <hr />
       <Calculator />
+      <hr />
+      <ShoppingList />
     </>
   );
 }

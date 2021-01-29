@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# Environment
+.history
+.eslintcache
+
 # testing
 /coverage
 
