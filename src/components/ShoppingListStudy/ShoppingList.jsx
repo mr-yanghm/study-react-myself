@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 
 function petchItems() {
   return [
@@ -41,30 +41,35 @@ function petchItems() {
   ];
 }
 
-const SearchBar = (props) => (
-  <form>
-    <input
-      type="text"
-      placeholder="Search..."
-      onChange={props.handleFilterText}
-    />
-    <p>
-      <input type="checkbox" id="chkbox" onChange={props.handleInStockOnly} />{" "}
-      <label htmlFor="chkbox">Only show products in stock</label>
-    </p>
-  </form>
-);
+const SearchBar = () => {
+  const state = useContext(DefaultContext);
+  return (
+    <form>
+      <input
+        type="text"
+        placeholder="Search..."
+        onChange={state.handleFilterText}
+      />
+      <p>
+        <input type="checkbox" id="chkbox" onChange={state.handleInStockOnly} />{" "}
+        <label htmlFor="chkbox">Only show products in stock</label>
+      </p>
+    </form>
+  )
+};
 
-const ProductTable = ({ products, filterText, inStockOnly }) => {
+const ProductTable = ({ products }) => {
+  const state = useContext(DefaultContext);
+
   const rows = [];
   let lastCategory = null;
 
   products.forEach((product) => {
-    if (product.name.indexOf(filterText) === -1) {
+    if (product.name.indexOf(state.filterText) === -1) {
       return;
     }
 
-    if (inStockOnly && !product.stocked) {
+    if (state.inStockOnly && !product.stocked) {
       return;
     }
     if (product.category !== lastCategory) {
@@ -104,8 +109,8 @@ const ProductRow = ({ product }) => {
   const name = product.stocked ? (
     product.name
   ) : (
-    <span style={{ color: "red" }}>{product.name}</span>
-  );
+      <span style={{ color: "red" }}>{product.name}</span>
+    );
   return (
     <tr>
       <td>{name}</td>
@@ -114,12 +119,19 @@ const ProductRow = ({ product }) => {
   );
 };
 
+const DefaultContext = React.createContext({
+  filterText: "",
+  inStockOnly: false,
+});
+
 class ShoppingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filterText: "",
       inStockOnly: false,
+      handleFilterText: this.handleFilterText,
+      handleInStockOnly: this.handleInStockOnly
     };
   }
 
@@ -134,19 +146,15 @@ class ShoppingList extends Component {
   render() {
     const products = petchItems();
     return (
-      <div>
-        <SearchBar
-          filterText={this.state.filterText}
-          inStockOnly={this.state.inStockOnly}
-          handleFilterText={this.handleFilterText}
-          handleInStockOnly={this.handleInStockOnly}
-        />
-        <ProductTable
-          products={products}
-          filterText={this.state.filterText}
-          inStockOnly={this.state.inStockOnly}
-        ></ProductTable>
-      </div>
+      <DefaultContext.Provider value={this.state}>
+        <div>
+          <SearchBar
+          />
+          <ProductTable
+            products={products}
+          ></ProductTable>
+        </div>
+      </DefaultContext.Provider>
     );
   }
 }
