@@ -3,6 +3,7 @@ import "./App.css";
 import Calculator from "./components/Calculator";
 import Clock from "./components/Clock";
 import LoginControl from "./components/LoginControl";
+import MouseTracker from "./components/Mouse/MouseTracker";
 import NameForm from "./components/NameForm";
 import NumberList from "./components/NumberList";
 import Reservation from "./components/Reservation";
@@ -29,6 +30,8 @@ function App() {
       <Calculator />
       <hr />
       <ShoppingList />
+      <hr />
+      <MouseTracker />
     </>
   );
 }
