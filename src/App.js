@@ -6,6 +6,7 @@ import LoginControl from "./components/LoginControl";
 import MouseTracker from "./components/Mouse/MouseTracker";
 import NameForm from "./components/NameForm";
 import NumberList from "./components/NumberList";
+import Counter from "./components/Reducer/Counter";
 import Reservation from "./components/Reservation";
 import ShoppingList from "./components/ShoppingListStudy/ShoppingList";
 import Toggle from "./components/Toggle";
@@ -32,6 +33,8 @@ function App() {
       <ShoppingList />
       <hr />
       <MouseTracker />
+      <hr />
+      <Counter />
     </>
   );
 }
